@@ -11,14 +11,14 @@ var Filter    = function (filter) {
 // it will be evaluated as [[{} and {} and {}] or [{} and {}] or [{}]]
 // each object will have one condition and a reference value
 
-Filter.prototype.apply  = function (value) {
+Filter.prototype.apply  = function (data) {
     var self    = this;
     var boolFinal = false;
 
     self.filter.forEach(function(innerArray) {
         var innerVal  = true;
         innerArray.forEach(function (filter) {
-            innerVal = innerVal && evalFilter[filter.condition](filter, val);
+            innerVal = innerVal && evalFilter[filter.condition](filter, data[filter.dataField]);
         });
         boolFinal = boolFinal || innerVal;
     });
@@ -71,3 +71,6 @@ var evalFilter  = {
 
 
 }
+
+
+module.exports  = Filter;
