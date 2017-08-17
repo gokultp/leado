@@ -59,12 +59,12 @@ var evalFilter  = {
         return filter.referenceVal.indexOf(val) == 1;
     },
 
-    subStrOf : in : function(filter, val){
+    subStrOf  : function(filter, val){
         var regex = new RegExp(val, "i");
         return regex.test(filter.referenceVal)
     },
 
-    nSubStrOf : in : function(filter, val){
+    nSubStrOf  : function(filter, val){
         var regex = new RegExp(val, "i");
         return !regex.test(filter.referenceVal)
     },
