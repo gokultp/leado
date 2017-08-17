@@ -56,7 +56,7 @@ var evalFilter  = {
     },
 
     nin : function(filter, val){
-        return filter.referenceVal.indexOf(val) == 1;
+        return filter.referenceVal.indexOf(val) == -1;
     },
 
     subStrOf  : function(filter, val){
