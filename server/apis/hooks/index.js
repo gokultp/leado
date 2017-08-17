@@ -1,4 +1,6 @@
-var router = require('express').Router(); 
+var router          = require('express').Router(); 
+var controller      = require('./controller'); 
+
 
 router.get('/', function (req, res) {
     res.json({name: 'Gokul'})
