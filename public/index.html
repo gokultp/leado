@@ -1,24 +1,45 @@
-<html ng-app="scotchTodo">
+<html ng-app="leado">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
     
         <title>Node/Angular Todo App</title>
     
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-        <style>
-            html                    { overflow-y:scroll; }
-            body                    { padding-top:50px; }
-            #todo-list              { margin-bottom:30px; }
-        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
     
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-        <script src="core.js"></script>
-    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+        
     </head>
     <body ng-controller="mainController">
-        <h1> Hello world</h1>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo logo">Leado</a>
+            </div>
+        </nav>
+            <div class="col s12 webhook">
+                <div class="card darken-1">
+                    <div class="card-content">
+                        <span class="card-title">Card Title</span>
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#"><i class="tiy material-icons">mode_edit</i> Edit</a>
+                        <a href="#"> <i class="tiy material-icons">delete</i>Delete </a>
+                    </div>
+                </div>
+            </div>        
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large red">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>
+            
     </body>
     </html>
     

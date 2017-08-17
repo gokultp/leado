@@ -2,8 +2,6 @@ var router          = require('express').Router();
 var controller      = require('./controller'); 
 
 
-router.get('/', function (req, res) {
-    res.json({name: 'Gokul'})
-})
+router.get('/', controller.getAllHooks)
 
 module.exports = router;
