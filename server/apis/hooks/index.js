@@ -3,5 +3,10 @@ var controller      = require('./controller');
 
 
 router.get('/', controller.getAllHooks)
+router.get('/:id', controller.getHook);
+router.post('/:id/test', controller.testHook)
+router.post('/update', controller.updateHook)
+router.delete('/:id', controller.deleteHook)
+
 
 module.exports = router;

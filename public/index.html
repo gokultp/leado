@@ -5,47 +5,67 @@
     
         <title>Node/Angular Todo App</title>
     
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">        
         <link rel="stylesheet" href="styles.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        
+    </head>
+    <body>    
     
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-       
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+      
+        <!-- Angular Material Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
         <script src="controller.js"></script><!-- load jquery -->
         <script src="factory.js"></script><!-- load jquery -->        
         
         
-    </head>
-    <body ng-controller="mainController">
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo logo">Leado</a>
-            </div>
-        </nav>
 
-        <div ng-repeat="data in hooks">
-            <div class="col s12 webhook">
-                <div class="card darken-1">
-                    <div class="card-content">
-                        <span class="card-title"><i class="material-icons">device_hub</i>{{data.name}}</span>
-                        <p><i class="material-icons tiny">link</i>  {{data.url}}</p>
+        <div ng-controller="mainController">
+            <md-content>
+                        
+                <md-toolbar >
+                    <div class="md-toolbar-tools">
+                        <md-button class="md-icon-button" aria-label="Settings" ng-disabled="true">
+                        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                        </md-button>
+                
+                        <h2 flex md-truncate>Leado</h2>
                     </div>
-                    <div class="card-action">
-                        <a href="#"><i class="tiy material-icons">mode_edit</i> Edit</a>
-                        <a href="#"> <i class="tiy material-icons">delete</i>Delete </a>
-                    </div>
-                </div>
-            </div>        
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large red">
-                    <i class="large material-icons">add</i>
-                </a>
-            </div>
-        </div>
+                </md-toolbar>
+                  
+                <md-content class="md-padding" layout-xs="column" layout="row" style="height:90%" layout-wrap>
+                        
             
+                    <div ng-repeat="data in hooks" class="webhook" flex-xs flex-gt-xs="50" layout="column">
+                        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline"> <i class="material-icons">device_hub</i>{{data.name}}</span>
+                                    <span class="md-subhead"><i class="material-icons">link</i>{{data.url}}</span>
+                                    
+                                </md-card-title-text>
+                            
+                            </md-card-title>
+                            <md-card-actions layout="row" layout-align="end center">
+                                <md-button ng-click="editHook(data, $event)"><i class="material-icons">create</i>Edit</md-button>
+                                <md-button ng-click="deleteHook(data)"><i class="material-icons">delete</i>Delete</md-button>
+                            </md-card-actions>
+                        </md-card>   
+                    
+                    </div>
+                </md-content>
+
+                <md-button class="md-fab md-fab-bottom-right md-button md-ink-ripple" aria-label="Create" ng-click="newHook($event)">
+                    <i class="material-icons">create</i>
+                </md-button>
+            
+            
+            </md-content>
+                
+        </div>
     </body>
     </html>
     

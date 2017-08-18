@@ -2,9 +2,28 @@
     padding-left: 30px !important;
 }
 body{
-    background: #ddd;
+    background: #fafafa;
 }
 
 .webhook {
     padding: 30px;
+}
+
+.fixed-bottom {
+    display: block;
+    right: 2px;
+    bottom: 2px;
+}
+
+.button-group{
+    float: right;
+}
+.green {
+    background-color: #5C5 !important;
+}
+
+.filter-container {
+    border: 1px dotted #aaaaaa;
+    border-radius: 3px;
+    margin: 15px;
 }

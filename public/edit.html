@@ -1,0 +1,119 @@
+<md-dialog aria-label="Configure Webhooks">
+    <form>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Configure Webhooks</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; min-width:800px;">
+        <md-tabs md-border-bottom md-dynamic-height md-selected="selectedTab">
+            <md-tab label="basic info" ng-disabled="true">
+                <md-content layout-padding>
+                    <div>
+
+                        <div layout-gt-xs="row">
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Name</label>
+                                <input ng-model="hook.name" >
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                        
+                    <md-button ng-click="saveName(hook._id, hook.name)" style="margin-right:20px;" class="md-primary button-group">
+                            Next
+                    </md-button>
+                    
+
+                                      
+                </md-content>
+            </md-tab>
+            <md-tab label="sample" ng-disabled="true">
+                <md-content layout-padding >
+                    <div>
+                        <div layout-gt-xs="row">   
+                            <label>Hit this endpoint with your data and Test</label>
+                        </div>
+
+                        <div layout-gt-xs="row">
+                            <p>{{hook.url + "/test"}}</p>
+                        </div>
+
+                        <div layout-gt-xs="row">
+                            <md-button class="md-raised md-primary" ng-class="{green : hook.tested}" ng-click="testHook()">
+                                Test 
+                                <i ng-show="hook.tested && !hook.testing" class="material-icons tiny" >check_circle</i>
+                            </md-button>
+                            <md-progress-circular  ng-show="hook.testing" class="md-hue-2" md-diameter="20px" style="margin-top: 10px;"></md-progress-circular>
+                            
+                        </div>
+
+                                    
+                        <div layout-gt-xs="row" ng-if="hook.sampleData && hook.tested">
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Sample Data</label>
+                                <pre>{{hook.sampleData | json}}</pre>                                
+                            </md-input-container>
+                        </div>
+                           
+                            
+                        <md-button ng-click="selectedTab=2" class="md-primary button-group" ng-disabled="!hook.tested">
+                            Next{{hook.tested}}
+                        </md-button>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="filter" ng-disabled="true">
+                <md-content >
+                    <div ng-repeat="andFilters in hook.filter" style="border:1px solid #ddd; padding:10px;">
+                        <div class="filter-container">
+                            <div ng-repeat="filter in andFilters">
+                                        
+                                <div layout-gt-xs="row" class="filter-container">
+                                    <md-input-container flex="33">
+                                        <md-select ng-model="filter.dataField">
+                                            <md-option ng-repeat="field in dataFields" value="{{field.key}}">{{field.key}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    
+                                    <md-input-container flex="33">
+                                        <md-select ng-model="filter.condition">
+                                            <md-option ng-repeat="cond in conditions" value="{{cond.key}}">{{cond.value}}</md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                    
+                                    <md-input-container flex="33">             
+                                        <input ng-model="filter.referenceVal" >
+                                    </md-input-container>
+                                </div>
+                                AND <md-button class="md-fab md-mini" aria-label="Eat cake" ng-show="$index==andFilters.length-1" ng-click="addFilter(andFilters)">
+                                        <i ng-show="hook.tested && !hook.testing" class="material-icons tiny" >create</i>
+                                    </md-button>                                                              
+                            </div>
+                        </div>
+                        OR <md-button class="md-fab md-mini" aria-label="Eat cake" ng-show="$index==hook.filter.length-1" ng-click="addAndFilter(hook.filter)">
+                                <i ng-show="hook.tested && !hook.testing" class="material-icons tiny" >create</i>
+                            </md-button> 
+                    </div>
+
+                   
+                    <md-button ng-click="saveFilter(hook._id, hook.filter)" style="margin-right:20px;" class="md-primary">
+                            Next
+                    </md-button>
+                </md-content>
+            </md-tab>
+            <md-tab label="final" ng-disabled="true">
+                <md-content>
+                    tab content here
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+
+   
+    </form>
+</md-dialog>
