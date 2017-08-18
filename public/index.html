@@ -43,7 +43,13 @@
                         <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
                             <md-card-title>
                                 <md-card-title-text>
-                                    <span class="md-headline"> <i class="material-icons">device_hub</i>{{data.name}}</span>
+                                    <span class="md-headline"> {{data.name}} <span style="float:right">
+                                        <span class="metrics"><i class="material-icons">device_hub</i> 0</span>
+                                        <span class="metrics"> <i class="material-icons">thumb_up</i> 0</span>
+                                        <span class="metrics"> <i class="material-icons">check_circle</i> 0</span>
+                                        
+                                        
+                                    </span></span>
                                     <span class="md-subhead"><i class="material-icons">link</i>{{data.url}}</span>
                                     
                                 </md-card-title-text>
@@ -52,6 +58,7 @@
                             <md-card-actions layout="row" layout-align="end center">
                                 <md-button ng-click="editHook(data, $event)"><i class="material-icons">create</i>Edit</md-button>
                                 <md-button ng-click="deleteHook(data)"><i class="material-icons">delete</i>Delete</md-button>
+                                
                             </md-card-actions>
                         </md-card>   
                     
@@ -62,7 +69,7 @@
                     <i class="material-icons">create</i>
                 </md-button>
             
-            
+                
             </md-content>
                 
         </div>

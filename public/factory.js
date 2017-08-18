@@ -27,5 +27,11 @@ angular.module('leado')
             });
         }
 
+        temp.getActions   = function () {
+            return $http.get('/apis/actions/').success(function(data){
+                temp = data;
+            });
+        }
+
         return temp;
     }])

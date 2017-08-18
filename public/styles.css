@@ -27,3 +27,8 @@ body{
     border-radius: 3px;
     margin: 15px;
 }
+
+.metrics{
+    padding: 5px;
+    margin-right: 10px;
+}

@@ -2,7 +2,7 @@ angular
 .module('leado', ['ngMaterial'])
 
 angular.module('leado')
-    .controller('mainController',['$scope', 'mainFactory', '$mdDialog',  function ($scope, mainFactory, $mdDialog) {
+    .controller('mainController',['$scope', 'mainFactory', '$mdDialog', '$mdMenu', function ($scope, mainFactory, $mdDialog, $mdMenu) {
         $scope.hooks    = [];
         function getHooks() {
             mainFactory.getHooks(1, 10).then(function (temp) {
@@ -11,6 +11,15 @@ angular.module('leado')
                 }
             });
         }
+
+
+        mainFactory.getActions().then(function (temp) {
+            if(temp.data.status){
+                $scope.actions  = temp.data.data;
+            }
+        });
+
+
         getHooks();
         $scope.newHook  = function (ev) {
             $scope.editHook({}, ev);
@@ -30,18 +39,22 @@ angular.module('leado')
                 targetEvent: ev,
                 clickOutsideToClose:true,
                 locals :{
-                    hook : hook
+                    hook : hook,
+                    actions : $scope.actions
                 }
             })
             .then(function(answer) {
-                $scope.status = 'You said the information was "' + answer + '".';
+                getHooks();
+                
             }, function() {
-                $scope.status = 'You cancelled the dialog.';
+                getHooks();
+                
             });
         }
 
-        function DialogController($scope, $mdDialog, hook, mainFactory) {
+        function DialogController($scope, $mdDialog, hook, actions, mainFactory, $mdMenu) {
             $scope.hook = hook;
+            $scope.actions = actions;
             $scope.selectedTab  = 0;
             $scope.dataFields = getFields($scope.hook.sampleData);
             if(!$scope.hook.filter || !$scope.hook.filter[0] || !$scope.hook.filter[0][0]){
@@ -59,23 +72,13 @@ angular.module('leado')
                 {key: 'subStrOf', value: 'Substring of'},
                 {key: 'nSubStrOf', value: 'Not Substring of'},
             ]
-            $scope.hide = function() {
-                $mdDialog.hide();
-            };
-        
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-        
-            $scope.answer = function(answer) {
-                $mdDialog.hide(answer);
-            };
 
             $scope.testHook = function () {
                 $scope.hook.testing = true
                 mainFactory.getHookById($scope.hook._id).then(function (temp) {
                     if(temp.data.status){
                         $scope.hook    = temp.data.data;
+                        $scope.hook.mapping = {};
                         if(!$scope.hook.filter || !$scope.hook.filter[0] || !$scope.hook.filter[0][0]){
                             $scope.hook.filter = [[{}]];
                         }
@@ -141,6 +144,23 @@ angular.module('leado')
                 })
 
                 
+            }
+
+            $scope.setAction    = function (action) {
+                $scope.action   = JSON.parse(action);
+            }
+
+            $scope.saveMapping  = function (id, mapping) {
+                mainFactory.updateHookById({
+                    id : id,
+                    update : {
+                        mapping: mapping,
+                        actionId: $scope.action._id
+                    }
+                }).then(function (temp) {
+                        $mdDialog.hide();
+                    
+                })
             }
 
 

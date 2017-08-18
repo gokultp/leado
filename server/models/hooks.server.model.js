@@ -10,7 +10,9 @@ var TriggerSchema = new Schema({
         default : false
     },
     sampleData : {},
-    action  : String
+    action  : String,
+    mapping : {},
+    actionId : Schema.Types.ObjectId
 
 });
 

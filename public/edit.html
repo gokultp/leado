@@ -62,7 +62,7 @@
                            
                             
                         <md-button ng-click="selectedTab=2" class="md-primary button-group" ng-disabled="!hook.tested">
-                            Next{{hook.tested}}
+                            Next
                         </md-button>
                     </div>
                 </md-content>
@@ -101,15 +101,52 @@
                     </div>
 
                    
-                    <md-button ng-click="saveFilter(hook._id, hook.filter)" style="margin-right:20px;" class="md-primary">
+                    <md-button ng-click="saveFilter(hook._id, hook.filter)" style="margin-right:20px;" class="md-primary button-group">
                             Next
                     </md-button>
                 </md-content>
             </md-tab>
             <md-tab label="final" ng-disabled="true">
                 <md-content>
-                    tab content here
+                    <md-input-container flex="100"> 
+                        <label>Select action</label>            
+                        <md-select ng-model="selectedAction" ng-change="setAction(selectedAction)">
+                            <md-option ng-repeat="action in actions" value="{{action}}">{{action.name}}</md-option>
+                        </md-select> 
+                    </md-input-container>
+                    <div ng-if="selectedAction">
+                        <div layout="row" ng-repeat="field in action.fields">
+                                <md-input-container flex="30"> 
+                                    <label>{{field}}</label>            
+                                </md-input-container>
+
+                                <md-input-container flex="65"> 
+                                    <textarea ng-model="hook.mapping[field]" md-maxlength="150" rows="2" md-select-on-focus></textarea>
+                                </md-input-container>
+                                <md-input-container flex="5"> 
+
+
+                                    <md-menu>
+                                        <md-button >
+                                                <i class="material-icons tiny" >arrow_drop_down</i>                                    
+                                        </md-button ng-click="$mdMenu.open($event)">
+                                        <md-menu-content width="4">
+                                            <md-menu-item ng-repeat="item in [1, 2, 3]">
+                                                <md-button>
+                                                    Option {{item}}
+                                                </md-button>
+                                            </md-menu-item>
+                                    </md-menu>
+                                </md-input-container>
+                                
+                
+                        </div>
+                    </div>
+                    <md-button ng-click="saveMapping(hook._id, hook.mapping)" style="margin-right:20px;" class="md-primary button-group">
+                            Save
+                    </md-button>
                 </md-content>
+                
             </md-tab>
         </md-tabs>
     </md-dialog-content>
