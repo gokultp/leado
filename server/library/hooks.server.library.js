@@ -74,7 +74,7 @@ exports.deleteHook  = function (id) {
 exports.createHook  = function (data) {
     var webhook     = new HooksModel(data);
     if(process.env.NODE_ENV == "production"){
-        webhook.url = "http://leado.herokuapp.com/" + webhook._id;
+        webhook.url = "http://leado.herokuapp.com/apis/hooks/" + webhook._id;
     }
     else{
         webhook.url = "http://localhost:8080/apis/hooks/" + webhook._id;
